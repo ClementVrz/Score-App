@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score App 2.0</title>
     <link rel="stylesheet" href="style.css">
-    <title>Score App</title>
 </head>
 <body>
-    <h1>Mon Score</h1>
-    <div id="score">0</div>
-    <button onclick="ajouterPoint()">+1 Point</button>
-    <button onclick="reset()">Reset</button>
+    <h1>Score App</h1>
+    
+    <div id="setup">
+        <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
+        <button onclick="genererChamps()">Valider</button>
+        <div id="inputNames"></div>
+    </div>
+
+    <div id="game" style="display:none;">
+        <table id="scoreTable">
+            <thead><tr id="tableHead"></tr></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <button onclick="ajouterManche()">Ajouter une manche</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
