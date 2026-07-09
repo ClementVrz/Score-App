@@ -1,32 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score Board Pro</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Score Board Pro</h1>
-        
-        <div id="setup">
-            <input type="number" id="nbJoueurs" placeholder="Nombre de joueurs">
-            <input type="number" id="nbManches" placeholder="Nombre de manches">
-            <button onclick="validerConfig()">Valider</button>
-            <div id="configDetails"></div>
+<div class="container">
+    <h1>Score Board Pro</h1>
+    <div id="setup">
+        <input type="number" id="nbJoueurs" placeholder="Nombre de joueurs">
+        <input type="number" id="nbManches" placeholder="Nombre de manches">
+        <select id="modeJeu">
+            <option value="max">Gagnant = Plus gros score</option>
+            <option value="min">Gagnant = Plus petit score</option>
+        </select>
+        <div style="margin-top: 10px;">
+            <label><input type="checkbox" id="avecEquipes"> Créer des équipes aléatoires</label>
         </div>
+        <button onclick="validerConfig()">Valider</button>
+        <div id="configDetails"></div>
+    </div>
 
-        <div id="game" style="display:none;">
-            <table id="scoreTable">
-                <thead><tr id="tableHead"><th>Manche</th></tr></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-            <div id="podium" class="podium-card"></div>
+    <div id="game" style="display:none;">
+        <table id="scoreTable">
+            <thead><tr id="tableHead"><th>Manche</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <button id="btnValider" onclick="validerManche()">Valider Manche</button>
+        <div id="podium" class="podium-card"></div>
+        <div style="margin-top: 20px;">
             <button onclick="recommencer()">Recommencer</button>
-            <button onclick="location.reload()">Menu Principal</button>
+            <button onclick="location.reload()">Menu</button>
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
