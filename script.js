@@ -4,23 +4,22 @@ function validerConfig() {
     let n = document.getElementById('nbJoueurs').value;
     totalManches = document.getElementById('nbManches').value;
     modeJeu = document.getElementById('modeJeu').value;
+    
+    if(!n || !totalManches) { alert("Remplis tous les champs !"); return; }
+
     let div = document.getElementById('configDetails');
-    div.innerHTML = "<h3>Noms :</h3>";
-    for(let i=0; i<n; i++) div.innerHTML += `<input type="text" class="nomJoueur" placeholder="Joueur ${i+1}"><br>`;
-    div.innerHTML += `<button onclick="demarrer()">Démarrer</button>`;
+    div.innerHTML = "<h3>Noms des joueurs :</h3>";
+    for(let i=0; i<n; i++) div.innerHTML += `<input type="text" class="nomJoueur" placeholder="Joueur ${i+1}">`;
+    div.innerHTML += `<button onclick="demarrer()">Lancer la partie</button>`;
 }
 
 function demarrer() {
     let noms = Array.from(document.querySelectorAll('.nomJoueur')).map(i => i.value);
-    if(document.getElementById('avecEquipes').checked) {
-        noms = noms.sort(() => Math.random() - 0.5);
-        joueurs = [{name: "Équipe 1", members: noms.slice(0,noms.length/2), scores: []}, 
-                   {name: "Équipe 2", members: noms.slice(noms.length/2), scores: []}];
-    } else {
-        joueurs = noms.map(name => ({name, scores: []}));
-    }
+    joueurs = noms.map(name => ({name, scores: [], total: 0}));
+    
     document.getElementById('setup').style.display = 'none';
     document.getElementById('game').style.display = 'block';
+    
     let head = document.getElementById('tableHead');
     joueurs.forEach(j => head.innerHTML += `<th>${j.name}</th>`);
     ajouterLigneManche();
@@ -28,13 +27,35 @@ function demarrer() {
 
 function ajouterLigneManche() {
     let tbody = document.getElementById('tableBody');
-    let row = `<tr><td>M${mancheActuelle + 1}</td>`;
+    let row = `<tr><td>${mancheActuelle + 1}</td>`;
     joueurs.forEach((j, i) => {
-        row += `<td><input type="number" class="score-m${mancheActuelle} j${i}" value="0"></td>`;
+        row += `<td><input type="number" class="score-input" data-joueur="${i}"></td>`;
     });
     tbody.innerHTML += row + "</tr>";
 }
 
+function validerManche() {
+    let inputs = document.querySelectorAll(`.score-input`);
+    // On ne récupère que les inputs de la manche actuelle
+    let start = mancheActuelle * joueurs.length;
+    for(let i=0; i<joueurs.length; i++) {
+        let val = parseInt(inputs[start + i].value) || 0;
+        joueurs[i].scores.push(val);
+        joueurs[i].total += val;
+    }
+    
+    mancheActuelle++;
+    if(mancheActuelle < totalManches) ajouterLigneManche();
+    else afficherPodium();
+}
+
+function afficherPodium() {
+    document.getElementById('btnValider').style.display = 'none';
+    joueurs.sort((a, b) => modeJeu === 'max' ? b.total - a.total : a.total - b.total);
+    document.getElementById('podium').innerHTML = `<div class="podium-card"><h3>🏆 Vainqueur : ${joueurs[0].name}</h3><p>Score final : ${joueurs[0].total}</p></div>`;
+}
+
+function recommencer() { location.reload(); }
 function validerManche() {
     joueurs.forEach((j, i) => {
         let val = parseInt(document.querySelector(`.score-m${mancheActuelle}.j${i}`).value) || 0;
