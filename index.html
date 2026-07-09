@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score App 2.0</title>
+    <title>Score Board Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Score App</h1>
-    
-    <div id="setup">
-        <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
-        <button onclick="genererChamps()">Valider</button>
-        <div id="inputNames"></div>
-    </div>
+    <div class="container">
+        <h1>Score Board Pro</h1>
+        
+        <div id="setup">
+            <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
+            <button onclick="genererChamps()">Suivant</button>
+            <div id="inputNames"></div>
+        </div>
 
-    <div id="game" style="display:none;">
-        <table id="scoreTable">
-            <thead><tr id="tableHead"></tr></thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-        <button onclick="ajouterManche()">Ajouter une manche</button>
+        <div id="game" style="display:none;">
+            <div id="equipesContainer"></div>
+            <table id="scoreTable">
+                <thead><tr id="tableHead"></tr></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+            <button onclick="ajouterManche()">+ Nouvelle manche</button>
+            <div id="podium" class="podium-card"></div>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
