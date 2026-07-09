@@ -1,8 +1,8 @@
-body { background: #0f172a; color: #f1f5f9; font-family: sans-serif; padding: 20px; }
-.container { max-width: 500px; margin: auto; }
-#setup { display: flex; flex-direction: column; gap: 10px; }
-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-th, td { border: 1px solid #334155; padding: 8px; text-align: center; }
-input[type="number"], input[type="text"], select { padding: 10px; border-radius: 5px; border: none; }
-button { background: #38bdf8; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-.podium-card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; }
+body { background: #f8fafc; color: #1e293b; font-family: -apple-system, sans-serif; padding: 20px; }
+.container { max-width: 450px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+h1 { text-align: center; color: #3b82f6; }
+input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
+button { width: 100%; background: #3b82f6; color: white; padding: 14px; border: none; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+table { width: 100%; margin: 20px 0; border-collapse: collapse; }
+td input { width: 50px; text-align: center; }
+.podium-card { background: #eff6ff; padding: 20px; border-radius: 15px; text-align: center; border: 2px solid #3b82f6; }
