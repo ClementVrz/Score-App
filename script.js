@@ -1,32 +1,38 @@
 let joueurs = [];
+let modeEquipes = false;
 
 function genererChamps() {
     let n = document.getElementById('numPlayers').value;
-    let container = document.getElementById('inputNames');
-    container.innerHTML = "";
-    for(let i=0; i<n; i++) {
-        container.innerHTML += `<input type="text" class="nomJoueur" placeholder="Nom joueur ${i+1}"><br>`;
-    }
-    container.innerHTML += `<button onclick="demarrerJeu()">Démarrer</button>`;
+    let html = `<h3>Noms des joueurs</h3>`;
+    for(let i=0; i<n; i++) html += `<input type="text" class="nomJoueur" placeholder="Joueur ${i+1}">`;
+    html += `<label><input type="checkbox" id="checkEquipes"> Créer des équipes aléatoires</label>`;
+    html += `<br><button onclick="demarrerJeu()">Démarrer</button>`;
+    document.getElementById('inputNames').innerHTML = html;
 }
 
 function demarrerJeu() {
-    document.querySelectorAll('.nomJoueur').forEach(input => joueurs.push({name: input.value, scores: []}));
+    let inputs = document.querySelectorAll('.nomJoueur');
+    modeEquipes = document.getElementById('checkEquipes').checked;
+    inputs.forEach(i => joueurs.push({name: i.value, score: 0}));
+    
+    if(modeEquipes) {
+        joueurs.sort(() => Math.random() - 0.5);
+        // Logique simplifiée : créer 2 équipes
+    }
+    
     document.getElementById('setup').style.display = 'none';
     document.getElementById('game').style.display = 'block';
     afficherTableau();
 }
 
-function afficherTableau() {
-    let head = document.getElementById('tableHead');
-    head.innerHTML = "<th>Manche</th>" + joueurs.map(j => `<th>${j.name}</th>`).join("");
+function ajouterManche() {
+    // Ajoute un score, puis recalcule le podium
+    calculerPodium();
 }
 
-function ajouterManche() {
-    let tbody = document.getElementById('tableBody');
-    let row = `<tr><td>${tbody.rows.length + 1}</td>`;
-    joueurs.forEach((j, i) => {
-        row += `<td><input type="number" class="score-input-${i}" value="0"></td>`;
-    });
-    tbody.innerHTML += row + "</tr>";
+function calculerPodium() {
+    let podiumDiv = document.getElementById('podium');
+    let classement = [...joueurs].sort((a, b) => b.score - a.score);
+    podiumDiv.innerHTML = "<h3>Classement</h3>" + 
+        classement.map((j, i) => `<p>${i+1}. ${j.name} : ${j.score} pts</p>`).join("");
 }
