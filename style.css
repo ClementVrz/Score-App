@@ -4,3 +4,9 @@ table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
 input { width: 90%; padding: 12px; margin: 5px 0; border-radius: 8px; border: none; }
 button { background: #38bdf8; color: #0f172a; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 .podium-card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; }
+@keyframes scoreUp {
+    0% { transform: scale(1); color: #38bdf8; }
+    50% { transform: scale(1.2); color: #fff; }
+    100% { transform: scale(1); color: #38bdf8; }
+}
+.animate-score { animation: scoreUp 0.3s ease; }
