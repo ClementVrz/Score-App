@@ -1,8 +1,8 @@
 body { background: #0f172a; color: #f1f5f9; font-family: sans-serif; padding: 20px; }
 .container { max-width: 600px; margin: auto; }
-.table-wrapper { overflow-x: auto; margin: 20px 0; }
-table { width: 100%; border-collapse: collapse; }
-th, td { border: 1px solid #334155; padding: 10px; text-align: center; }
-input { width: 60px; padding: 5px; border-radius: 4px; border: none; }
-button { background: #38bdf8; color: #0f172a; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-.podium-card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th, td { border: 1px solid #334155; padding: 8px; text-align: center; }
+input { width: 80%; padding: 10px; margin: 5px; border-radius: 5px; }
+button { background: #38bdf8; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+.podium-card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; animation: pop 0.5s ease-out; }
+@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
