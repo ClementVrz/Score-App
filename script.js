@@ -1,40 +1,49 @@
 let joueurs = [];
-
-function genererChamps() {
-    let n = document.getElementById('numPlayers').value;
-    let html = `<h3>Noms des joueurs</h3>`;
-    for(let i=0; i<n; i++) html += `<input type="text" class="nomJoueur" placeholder="Joueur ${i+1}">`;
-    html += `<br><button onclick="demarrerJeu()">Démarrer</button>`;
-    document.getElementById('inputNames').innerHTML = html;
-}
+let nbManches = 0;
 
 function demarrerJeu() {
-    document.querySelectorAll('.nomJoueur').forEach(i => joueurs.push({name: i.value, score: 0}));
+    let inputs = document.querySelectorAll('.nomJoueur');
+    inputs.forEach(i => joueurs.push({name: i.value, scores: []}));
     document.getElementById('setup').style.display = 'none';
     document.getElementById('game').style.display = 'block';
-    afficherTableau();
+    ajouterManche(); // Ajoute la première manche d'office
 }
 
-function afficherTableau() {
-    let tbody = document.getElementById('tableBody');
+function ajouterManche() {
+    nbManches++;
     let head = document.getElementById('tableHead');
-    head.innerHTML = "<th>Joueur</th><th>Score</th>";
-    tbody.innerHTML = joueurs.map((j, i) => `
-        <tr>
-            <td>${j.name}</td>
-            <td><input type="number" class="score-input" onchange="mettreAJourScore(${i}, this.value)" value="0"></td>
-        </tr>
-    `).join("");
+    head.innerHTML += `<th>M${nbManches}</th>`;
+    
+    let tbody = document.getElementById('tableBody');
+    tbody.innerHTML = ""; // Réinitialise l'affichage
+    
+    joueurs.forEach((j, i) => {
+        j.scores.push(0); // Ajoute une manche vide pour ce joueur
+        let row = `<tr><td>${j.name}</td>`;
+        j.scores.forEach((s, mIndex) => {
+            row += `<td><input type="number" class="score-input" onchange="majScore(${i}, ${mIndex}, this.value)" value="${s}"></td>`;
+        });
+        row += `</tr>`;
+        tbody.innerHTML += row;
+    });
 }
 
-function mettreAJourScore(index, valeur) {
-    joueurs[index].score = parseInt(valeur) || 0;
-    // Animation
-    let input = document.querySelectorAll('.score-input')[index];
-    input.classList.add('animate-score');
-    setTimeout(() => input.classList.remove('animate-score'), 300);
-    
+function majScore(joueurIndex, mancheIndex, valeur) {
+    joueurs[joueurIndex].scores[mancheIndex] = parseInt(valeur) || 0;
     calculerPodium();
+}
+
+function calculerPodium() {
+    let podiumDiv = document.getElementById('podium');
+    // On calcule le total pour chaque joueur
+    let classement = joueurs.map(j => ({
+        name: j.name, 
+        total: j.scores.reduce((a, b) => a + b, 0)
+    })).sort((a, b) => b.total - a.total);
+
+    podiumDiv.innerHTML = "<h3>Classement</h3>" + 
+        classement.map((j, i) => `<p>${i+1}. ${j.name} : <b>${j.total} pts</b></p>`).join("");
+}    calculerPodium();
 }
 
 function calculerPodium() {
