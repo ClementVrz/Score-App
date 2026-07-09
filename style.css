@@ -10,3 +10,4 @@ button { background: #38bdf8; color: #0f172a; border: none; padding: 12px 20px; 
     100% { transform: scale(1); color: #38bdf8; }
 }
 .animate-score { animation: scoreUp 0.3s ease; }
+#game { overflow-x: auto; } /* Permet de scroller horizontalement sur le tableau */
