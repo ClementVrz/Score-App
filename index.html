@@ -10,12 +10,16 @@
     <div class="container">
         <h1>Score Board Pro</h1>
         
-        <div id="setup">
-            <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
-            <button onclick="genererChamps()">Valider</button>
-            <div id="inputNames"></div>
-        </div>
-
+       <div id="setup">
+    <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
+    <button onclick="genererChamps()">Valider</button>
+    <div id="inputNames"></div>
+    <div id="options" style="display:none;">
+        <input type="number" id="nbManches" placeholder="Nombre total de manches">
+        <input type="number" id="nbEquipes" placeholder="Nombre d'équipes (0 pour solo)">
+        <button onclick="demarrerJeu()">Démarrer la partie</button>
+    </div>
+</div>
         <div id="game" style="display:none;">
             <div class="table-wrapper">
                 <table id="scoreTable">
