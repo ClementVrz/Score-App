@@ -12,28 +12,23 @@
         
         <div id="setup">
             <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
-            <button onclick="genererChamps()">Suivant</button>
+            <button onclick="genererChamps()">Valider</button>
             <div id="inputNames"></div>
         </div>
 
         <div id="game" style="display:none;">
-            <div id="equipesContainer"></div>
-            <table id="scoreTable">
-                <thead><tr id="tableHead"></tr></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+            <div class="table-wrapper">
+                <table id="scoreTable">
+                    <thead><tr id="tableHead"><th>Joueur</th></tr></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
             <button onclick="ajouterManche()">+ Nouvelle manche</button>
             <div id="podium" class="podium-card"></div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
-</html>
-<div id="game" style="display:none;">
-    <table id="scoreTable">
-        <thead><tr id="tableHead"><th>Joueur</th></tr></thead>
-        <tbody id="tableBody"></tbody>
-    </table>
-    <button onclick="ajouterManche()">+ Nouvelle manche</button>
+</html>    <button onclick="ajouterManche()">+ Nouvelle manche</button>
     <div id="podium" class="podium-card"></div>
 </div>
