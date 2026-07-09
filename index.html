@@ -10,29 +10,23 @@
     <div class="container">
         <h1>Score Board Pro</h1>
         
-       <div id="setup">
-    <input type="number" id="numPlayers" placeholder="Nombre de joueurs">
-    <button onclick="genererChamps()">Valider</button>
-    <div id="inputNames"></div>
-    <div id="options" style="display:none;">
-        <input type="number" id="nbManches" placeholder="Nombre total de manches">
-        <input type="number" id="nbEquipes" placeholder="Nombre d'équipes (0 pour solo)">
-        <button onclick="demarrerJeu()">Démarrer la partie</button>
-    </div>
-</div>
+        <div id="setup">
+            <input type="number" id="nbJoueurs" placeholder="Nombre de joueurs">
+            <input type="number" id="nbManches" placeholder="Nombre de manches">
+            <button onclick="validerConfig()">Valider</button>
+            <div id="configDetails"></div>
+        </div>
+
         <div id="game" style="display:none;">
-            <div class="table-wrapper">
-                <table id="scoreTable">
-                    <thead><tr id="tableHead"><th>Joueur</th></tr></thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
-            <button onclick="ajouterManche()">+ Nouvelle manche</button>
+            <table id="scoreTable">
+                <thead><tr id="tableHead"><th>Manche</th></tr></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
             <div id="podium" class="podium-card"></div>
+            <button onclick="recommencer()">Recommencer</button>
+            <button onclick="location.reload()">Menu Principal</button>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
-</html>    <button onclick="ajouterManche()">+ Nouvelle manche</button>
-    <div id="podium" class="podium-card"></div>
-</div>
+</html>
